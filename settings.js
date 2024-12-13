@@ -1,6 +1,6 @@
 /*
 Base By Axel
-Creatior is Selxyzz
+Creator is Selxyzz
 Group Main Bot: https://chat.whatsapp.com/He1CTwgCL6B3lpQ8dvtPvY
 Join Untuk Menggunakan Bot
 */
