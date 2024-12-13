@@ -13,7 +13,7 @@ module.exports = {
       return m.reply("Masukkan pertanyaanmu kepada YanzGPT.");
     }
     try {
-      await m.reply("*⏳ Generation Answer*");
+      await m.reply("*⏳ Generating Answer*");
       const ai = new YanzGPT();
       const response = await ai.chat(text);
 
