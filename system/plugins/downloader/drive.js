@@ -1,5 +1,5 @@
 const axios = require('axios');
-const fs = require('fs');
+const cherio = require('cheerio');
 
 module.exports = {
   command: "drive",
@@ -8,18 +8,17 @@ module.exports = {
   settings: {
     limit: true
   },
-  description: "Download Google Drive Di Sini.",
+  description: "✨ Unduh file dari Google Drive dengan mudah dan cepat! 🌐",
   loading: true,
   async run(m, { sock, text }) {
     if (!text) {
-      return m.reply("Masukkan URL Drive Anda.");
+      return m.reply("⚠️ *Masukkan URL Drive Anda terlebih dahulu!* 🌟");
     }
     if (!/^https?:\/\/(www\.)?drive\.google\.com\/file\/d\/.+$/.test(text)) {
-      return m.reply('URL tidak valid.');
+      return m.reply("❌ *URL tidak valid!* Mohon gunakan URL yang benar. 🔗");
     }
     try {
-      let api = await drive(text)
-      let ress = api.data;
+      let ress = await drive(text);
       let name = ress.name;
       let dl = ress.download;
       let link = ress.link;
@@ -32,11 +31,11 @@ module.exports = {
         document: buffer,
         mimetype: mimetype,
         fileName: name,
-        caption: `Berhasil mengunduh file:\n\n*Nama*: ${name}\n*Link*: ${link}`,
+        caption: `🎉 *Berhasil mengunduh file!* 📂\n\n📛 *Nama*: ${name}\n🔗 *Link*: ${link}`,
         contextInfo: {
           externalAdReply: {
             title: name,
-            body: `~ Devolution - DriveDl`,
+            body: `~ Devolution - DriveDl 🚀`,
             mediaType: 1,
             thumbnailUrl: "https://pomf2.lain.la/f/7bp4f541.jpg",
             sourceUrl: link,
@@ -50,7 +49,7 @@ module.exports = {
         }
       });
     } catch (error) {
-      m.reply("Gagal mengunduh file. Pastikan URL valid dan coba lagi.");
+      m.reply("💥 *Gagal mengunduh file!* Pastikan URL valid dan coba lagi. 🔄");
     }
   }
 };
@@ -58,14 +57,14 @@ module.exports = {
 async function drive(url) {
   return new Promise(async (resolve, reject) => {
     try {
-      if (!/drive\.google\.com\/file\/d\//gi.test(url))
+      if (!/drive\.google\.com\/file\/d\//gi.test(url)) 
         return reject("Invalid URL");
-      const res = await fetch(url).then((v) => v.text());
+      const res = await axios.get(url).then((v) => v.data);
       const $ = cherio.load(res);
       const id = url.split("/")[5];
       const data = {
-        name: $("head").find("title").text().split("-")[0].trim(),
-        download: `https://drive.usercontent.google.com/uc?id=${id}&export=download`,
+        name: $("title").text().split("-")[0].trim(),
+        download: `https://drive.google.com/uc?id=${id}&export=download`,
         link: url,
       };
 

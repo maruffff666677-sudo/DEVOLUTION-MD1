@@ -1,53 +1,55 @@
-const axios = require("axios");
-const fs = require("fs");
-
 module.exports = {
   command: "mediafire",
   alias: ["mediafiredl", "mfdl"],
   category: ["downloader"],
   settings: {
-    limit: true,
+    limit: true
   },
-  description: "Download Mediafire dengan cepat dan mudah",
+  description: "📥 Download file dari Mediafire dengan cepat! 🚀",
   loading: true,
   async run(m, { sock, text }) {
-    if (!text) return m.reply("⚠️ Harap masukkan URL Mediafire yang valid.");
-    if (!text.includes("mediafire.com")) return m.reply("⚠️ URL tidak valid!");
-
+    if (!text) {
+      return m.reply("⚠️ *Masukkan URL Mediafire terlebih dahulu!* 🌐");
+    }
+    if (!text.includes('mediafire.com')) {
+      return m.reply('❌ *URL tidak valid!* Pastikan URL Mediafire benar. 🔗');
+    }
     try {
-      let api = await axios.get(`https://apisanz.my.id/download/mediafire?text=${text}`);
-      let { name, filename, type, size, created, media: dl, link } = api.data.data;
+      const response = await fetch(`https://restapii.rioooxdzz.web.id/api/mediafire?url=${text}`);
+      const json = await response.json();
+      
+      if (!json.data.response) throw '❌ *Gagal mengambil data!*';
 
-      let buffer = Buffer.from((await axios.get(dl, { responseType: "arraybuffer" })).data, "binary");
+      let { download, filename, size, ext, uploaded, mimetype } = json.data.response;
 
-      await sock.sendMessage(m.chat, {
-        document: buffer,
-        mimetype: type,
-        fileName: filename || name,
-        caption: `📁 *File berhasil diunduh!*\n\n🔹 *Nama*: ${name}\n🔹 *Ukuran*: ${size}\n🔹 *Tipe*: ${type}\n🔹 *Tanggal*: ${new Date(created).toLocaleString("id-ID", {
-          day: "numeric",
-          month: "long",
-          year: "numeric",
-        })}\n🔹 *Link*: ${link}`,
+      let caption = `
+🎉 *Berhasil Mengunduh File!* 📂
+*💌 Nama:* ${filename}
+*📊 Ukuran:* ${size}
+*🗂️ Ekstensi:* ${ext}
+*📨 Diunggah:* ${uploaded}
+`.trim();
+
+      await sock.sendMessage(m.cht, {
+        document: { url: download },
+        mimetype: mimetype,
+        fileName: filename,
+        caption: caption,
         contextInfo: {
           externalAdReply: {
-            title: name,
-            body: `Ukuran file: ${size}`,
+            title: filename,
+            body: `📏 Ukuran: ${size}`,
             mediaType: 1,
             thumbnailUrl: "https://files.catbox.moe/ifru42.jpg",
-            sourceUrl: link,
-            renderLargerThumbnail: true,
+            sourceUrl: download,
+            renderLargerThumbnail: true
           },
-          forwardedNewsletterMessageInfo: {
-            newsletterJid: "20202020220@newsletter",
-            newsletterName: "🌦 Devolution",
-            serverMessageId: -1,
-          },
-        },
+        }
       });
+
     } catch (error) {
       console.error(error);
-      m.reply("❌ Gagal mengunduh file. Pastikan URL valid dan coba lagi.");
+      m.reply("💥 *Gagal mengunduh file!* Pastikan URL valid dan coba lagi. 🔄");
     }
-  },
+  }
 };
