@@ -16,6 +16,22 @@ module.exports = async (m, sock, store) => {
     const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
     switch (isCommand ? m.command.toLowerCase() : false) {
+    case "llama":{
+    let input = m.isQuoted ? m.quoted.body : m.text;
+    if (!input) {
+      return m.reply("Input textnya?");
+    }
+
+    try {
+      let pee = await axios.get(`https://restapii.rioooxdzz.web.id/api/llama?message=${input}`);
+      let llamaResponse = pee.data.data.response;
+      await m.reply(llamaResponse)
+    } catch (e) {
+      console.error(e.message);
+      return m.reply("Llama Sedang Maintenance");
+    }
+  }
+  break
         case "sticker":
         case "s": {
             try {

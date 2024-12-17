@@ -17,7 +17,7 @@ Kami dari *DEVOLUTION-DEVELOPMENT*, dengan bangga memperkenalkan _DEVOLUTION-MD1
 - *Sanzz* – Pengurus REST API  
 
 🔗 *Akses script dan mulai eksplorasi:*  
-👉 [**GitHub DEVOLUTION-MD1**](https://github.com/DEVOLUTION-BOT/DEVOLUTION-MD1)  
+👉 https://github.com/DEVOLUTION-BOT/DEVOLUTION-MD1  
 
 *Mengapa DEVOLUTION-MD1?*  
 ✨ Dibangun untuk mendukung kebutuhan pengelolaan WhatsApp secara efisien.  

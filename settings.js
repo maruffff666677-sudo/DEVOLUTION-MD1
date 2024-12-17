@@ -15,6 +15,7 @@ const config = {
       packname: "Devolution",
       author: "Selxyzz"
     },
+    apikey: "5SdBTI3hMfDFIOZxJ7",
    messages: {
       wait: "*( Loading )* Tunggu Sebentar...",
       owner: "*( Denied )* Kamu bukan owner ku !",

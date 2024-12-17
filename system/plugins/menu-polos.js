@@ -5,10 +5,10 @@ const fs = require("node:fs");
 const path = require("node:path");
 
 module.exports = {
-    command: "menu",
-    alias: ["menu", "help"],
+    command: "menu-polos",
+    alias: ["menu-polos", "polos-menu"],
     category: ["main"],
-    description: "Menampilkan menu bot",
+    description: "Menampilkan menu polosan bot",
     loading: true,
     async run(m, { sock, plugins, config, Func }) {
     let data = fs.readFileSync(process.cwd()+'/system/case.js', 'utf8');
@@ -63,23 +63,14 @@ Object.entries(menu).forEach(([tag, commands]) => {
     commands.command.forEach((command, index) => {
         caption += `*${index + 1}.* ${m.prefix + command.name}\n${command.description ? `> ${command.description}\n` : ''}`
             });
-      });   
-      const packageJsonPath = path.resolve(process.cwd(), 'package.json');
-        const packageJsonBuffer = fs.readFileSync(packageJsonPath);
+      });   qq
       
         m.reply({
-            document: packageJsonBuffer,
-            filename: "~ Devolution ~",
-            caption: caption,
+            text: caption, 
             contextInfo: {
                 mentionedJid: [m.sender],
                 isForwarded: !0,
                 forwardingScore: 127,
-                forwardedNewsletterMessageInfo: {
-                    newsletterJid: "20202020220@newsletter",
-                    newsletterName: "ðŸŒ¦ Devolution",
-                    serverMessageId: -1
-                },
                 externalAdReply: {
                     title: "~ Devolution Bot WhatsApp ",
                     body: "- Devolution Siap Membantu Sehari - Hari Anda!",
