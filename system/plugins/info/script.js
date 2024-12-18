@@ -6,32 +6,41 @@ module.exports = {
     loading: true,
     async run(m, { sock }) {
         const teks = `
-🌐 *DEVOLUTION-MD1: Membuka Era Baru Bot WhatsApp* 🌐
+🌐 *🌟 DEVOLUTION-MD1: Membuka Era Baru Bot WhatsApp 🌟* 🌐  
 
-Hai @${m.sender.split('@')[0]},  
-Kami dari *DEVOLUTION-DEVELOPMENT*, dengan bangga memperkenalkan _DEVOLUTION-MD1_ – sebuah script bot WhatsApp yang sedang dalam tahap *Beta* dan dikembangkan dengan visi modern untuk memenuhi kebutuhan pengguna di masa kini.
+*📌 Versi: 1.0.0 – Stabil & Siap Eksplorasi!*  
 
-💼 *Tim Pengembang:*  
-- *Selxyzz* – Koordinator Pengembangan Teknis  
-- *Haidar* – Spesialis Solusi Kreatif  
-- *Sanzz* – Pengurus REST API  
+*Halo @${m.sender.split('@')[0]}!*
+Kami dari *🚀 DEVOLUTION-DEVELOPMENT 🚀*, dengan bangga mempersembahkan _*DEVOLUTION-MD1*_ – script bot WhatsApp *modern* yang dirancang untuk memenuhi kebutuhan pengguna era digital.  
 
-🔗 *Akses script dan mulai eksplorasi:*  
-👉 https://github.com/DEVOLUTION-BOT/DEVOLUTION-MD1  
+📚 *💡 Tentang DEVOLUTION-MD1 💡*  
+✨ *Versi 1.0.0: Stabil, Efisien, dan Kaya Fitur!*  
+✨ *Dibangun untuk efisiensi maksimal dan mendukung inovasi teknologi.*  
+✨ *Script siap digunakan dengan dokumentasi lengkap untuk kemudahan pengguna.*  
 
-*Mengapa DEVOLUTION-MD1?*  
-✨ Dibangun untuk mendukung kebutuhan pengelolaan WhatsApp secara efisien.  
-🚀 Fitur yang terus diperbarui sesuai tren teknologi terkini.  
-📢 Dukungan dari tim yang berdedikasi.  
+💼 *🌟 Tim Pengembang 🌟*  
+- *Selxyzz* – 🌐 *Koordinator Pengembangan Teknis*  
+- *Haidar* – 🎨 *Spesialis Solusi Kreatif*  
+- *Sanzz* – 🔌 *Pengurus REST API*  
+- *Rioo* – 🔧 *Pengurus REST API*  
+- *Vano* – 🛡️ *Pemimpin & Kebijakan Penggunaan REST API*  
 
-📝 *Catatan Penting:*  
-- Script ini masih versi _Beta_, jadi mungkin akan ada pembaruan dan perbaikan secara berkala.  
-- Berikan dukunganmu dengan *follow* dan beri ⭐ di GitHub!  
+🔗 *📂 Akses Script Resmi:*  
+✈ https://github.com/DEVOLUTION-BOT/DEVOLUTION-MD1  
 
-💡 *Mari bergabung bersama kami dan jadilah bagian dari pengembangan bot ini.*  
+✨ *Mengapa Pilih DEVOLUTION-MD1?*  
+✔️ *Dirancang untuk memenuhi kebutuhan pengelolaan WhatsApp secara efisien.*  
+✔️ *Fitur canggih yang terus diperbarui sesuai tren teknologi.*  
+✔️ *Dukungan dari tim profesional dan komunitas pengguna.*  
 
-*Salam hangat,*  
-*DEVOLUTION-DEVELOPMENT*
+📝 *⚠️ Catatan Penting:*  
+- Script ini kini telah mencapai *versi stabil (1.0.0)* dengan pembaruan rutin di masa depan.  
+- Berikan dukungan dengan *follow* dan beri ⭐ di GitHub!  
+
+🎉 *Mari bergabung bersama kami, eksplorasi potensinya, dan jadilah bagian dari revolusi bot WhatsApp ini!*  
+
+*Salam hangat penuh semangat,*  
+*💻 DEVOLUTION-DEVELOPMENT 💻*  
         `;
         await m.reply(teks, { mentions: [m.sender] });
     }
