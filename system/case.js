@@ -6,6 +6,8 @@ const axios = require("axios");
 const Func = require("../lib/function");
 const { writeExif } = require("../lib/sticker");
 const { catbox } = require("../lib/uploader");
+const { downloadContentFromMessage } = require('baileys');
+
 
 module.exports = async (m, sock, store) => {
     const isCommand = m.prefix && m.body.startsWith(m.prefix);
@@ -82,27 +84,26 @@ module.exports = async (m, sock, store) => {
             break;
         }
 
- case 'wm':
+case 'wm':
 case 'swm': {
     try {
         if (!m.quoted) {
             return m.reply(`Kirim/kutip stiker atau media lalu ketik ${m.prefix + m.command} San|Abc`);
         }
 
-        let packname = text.split('|')[0]?.trim() || config.sticker.packname;
-        let author = text.split('|')[1]?.trim() || config.sticker.author;
+        let text = m.text.split('|');
+        let packname = text[0]?.trim() || config.sticker.packname;
+        let author = text[1]?.trim() || config.sticker.author;
 
         await sock.sendMessage(m.cht, { react: { text: "🔎", key: m.key } });
 
         if (/image|video|webp/.test(quoted.msg?.mimetype)) {
             let media = await quoted.download();
 
-            // Validasi durasi untuk video
             if (/video/.test(quoted.msg?.mimetype) && quoted.msg?.seconds > 25) {
                 return m.reply('Maksimal durasi video adalah 25 detik!');
             }
 
-            // Membuat stiker dengan watermark
             let sticker = await writeExif(
                 { mimetype: quoted.msg.mimetype, data: media },
                 { packName: packname, packPublish: author }

@@ -12,6 +12,10 @@ module.exports = {
         return m.reply('⚠️ *Hanya admin yang bisa menggunakan perintah ini!* ⚡️');
       }
 
+      if (!m.isBotAdmin) {
+        return m.reply('⚠️ *Bot harus menjadi admin terlebih dahulu untuk dapat mengundang!* ⚡️');
+      }
+
       const nomor = text.replace(/[^0-9]/g, '') + '@s.whatsapp.net';
       
       if (!nomor) {

@@ -27,7 +27,7 @@ module.exports = {
                     await sock.sendMessage(m.cht, { text: updatedMessage, edit: key }, { quoted: m });
 
                     setTimeout(async () => {
-                        updatedMessage += "\n\n🌟 *Vino* - Terima kasih telah menjadi pengurus dan pemimpin dalam pemeliharaan serta pembijakan REST API, yang memungkinkan bot ini menggunakan REST API untuk berkembang lebih jauh dan efisien di masa depan! 🧑‍💻";
+                        updatedMessage += "\n\n🌟 *Vano* - Terima kasih telah menjadi pengurus dan pemimpin dalam pemeliharaan serta pembijakan REST API, yang memungkinkan bot ini menggunakan REST API untuk berkembang lebih jauh dan efisien di masa depan! 🧑‍💻\n\n> `REST API OFFICIAL`\n> https://aniravecdo.online\n> https://devolution-cyan.vercel.app\n> https://restapii.rioooxdzz.web.id/";
                         await sock.sendMessage(m.cht, { text: updatedMessage, edit: key }, { quoted: m });
                     }, 1000);
                 }, 1000);

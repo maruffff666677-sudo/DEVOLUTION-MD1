@@ -16,11 +16,13 @@ const config = {
       author: "Selxyzz"
     },
     apikey: "5SdBTI3hMfDFIOZxJ7",
+    apikeyPrem: "pasonki23",
    messages: {
       wait: "*( Loading )* Tunggu Sebentar...",
       owner: "*( Denied )* Kamu bukan owner ku !",
       premium: "*( Denied )* Fitur ini khusus user premium",
       group: "*( Denied )* Fitur ini khusus group",
+      botAdmin: "*( Denied )* Fitur ini hanya bisa di akses hanya ketika bot menjadi admin.*"
    },
    database: "neko-db",
    tz: "Asia/Jakarta"

@@ -8,7 +8,7 @@ module.exports = {
         const teks = `
 🌐 *DEVOLUTION-MD1: Membuka Era Baru Bot WhatsApp* 🌐
 
-Hai *@${m.sender.split('@')[0]}*,  
+Hai @${m.sender.split('@')[0]},  
 Kami dari *DEVOLUTION-DEVELOPMENT*, dengan bangga memperkenalkan _DEVOLUTION-MD1_ – sebuah script bot WhatsApp yang sedang dalam tahap *Beta* dan dikembangkan dengan visi modern untuk memenuhi kebutuhan pengguna di masa kini.
 
 💼 *Tim Pengembang:*  

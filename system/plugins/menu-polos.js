@@ -63,23 +63,8 @@ Object.entries(menu).forEach(([tag, commands]) => {
     commands.command.forEach((command, index) => {
         caption += `*${index + 1}.* ${m.prefix + command.name}\n${command.description ? `> ${command.description}\n` : ''}`
             });
-      });   qq
+      });
       
-        m.reply({
-            text: caption, 
-            contextInfo: {
-                mentionedJid: [m.sender],
-                isForwarded: !0,
-                forwardingScore: 127,
-                externalAdReply: {
-                    title: "~ Devolution Bot WhatsApp ",
-                    body: "- Devolution Siap Membantu Sehari - Hari Anda!",
-                    mediaType: 1,
-                    thumbnailUrl: "https://files.catbox.moe/9h8lxy.jpg",
-                    sourceUrl: "https://chat.whatsapp.com/He1CTwgCL6B3lpQ8dvtPvY",
-                    renderLargerThumbnail: true
-                }
-            }
-        });
+     m.reply(caption)
     }
 }

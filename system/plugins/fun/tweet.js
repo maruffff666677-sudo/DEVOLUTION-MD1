@@ -28,7 +28,7 @@ module.exports = {
                 m.cht,
                 {
                     image: { url: url },
-                    caption: `✨ Berikut adalah cuitan palsu Anda:\n\n🖊️ **${text}**\n\n🔄 ${retweets} Retweet | ❤️ ${likes} Suka`,
+                    caption: `✨ Berikut adalah cuitan palsu Anda:\n\n🖊️**${text}*\n\n🔄 ${retweets} Retweet | ❤️ ${likes} Suka`,
                 },
                 { quoted: m }
             );
