@@ -17,8 +17,10 @@ module.exports = {
       if (convert === 0) {
          return m.reply('❌ Lagu yang Anda cari tidak ditemukan...');
       }
-
       let result = convert.all[0];
+      let api = await fetch(`https://restapii.rioooxdzz.web.id/api/ytmp3?url=${result.url}`);
+      let ress = await api.json();
+      let urlAudio = ress.data.url;
       let DEVOLUTION = `✨🎶 *[ PLAY - YOUTUBE ]* 🎶✨\n`;
       DEVOLUTION += `🎵 *Title*: ${result.title}\n`;
       DEVOLUTION += `🆔 *ID*: ${result.videoId}\n`;
@@ -49,7 +51,7 @@ module.exports = {
 
       try {
          await sock.sendMessage(m.cht, { 
-            audio: { url: `https://ytdl.nvlgroup.my.id/audio?url=${result.url}&bitrate=128` }, 
+            audio: { url: `${urlAudio}` }, 
             mimetype: 'audio/mpeg' 
          }, { quoted: m });
       } catch (e) {
