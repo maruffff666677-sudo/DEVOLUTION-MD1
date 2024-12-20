@@ -6,14 +6,14 @@
 
 module.exports = {
    command: "mengapa",
-   alias: ["why", "kenapa", "mengapakah"],
+   alias: ["why", "mengapakah"],
    category: ["fun"],
    settings: {
       limit: true
    },
    description: "Beri pertanyaan dengan kata 'mengapa' dan dapatkan jawaban",
    async run(m, { text }) {
-      if (!text || !text.toLowerCase().startsWith("mengapa")) {
+      if (!text) {
          return m.reply("❌ *Eh salah, cuy!* Pertanyaan harus diawali dengan *'Mengapa'*. \nContoh: *!mengapa mantan nikah duluan?*");
       }
 

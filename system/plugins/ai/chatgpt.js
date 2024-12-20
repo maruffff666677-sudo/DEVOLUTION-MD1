@@ -15,7 +15,7 @@ module.exports = {
        return m.reply("Masukkan Pertanyaan Anda Kepada ChatGpt Untuk Di Jawab")
      }
      try {
-       let api = await axios.get(`https://apisanz.my.id/ai/chatgpt?text=${text}`)
+       let api = await axios.get(`https://server.apisanz.my.id/ai/chatgpt?text=${text}`)
        let pesan = api.data.data;
        if (!pesan) {
          return m.reply("Tidak Ada Jawaban Dari Ai")

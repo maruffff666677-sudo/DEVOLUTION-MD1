@@ -15,7 +15,7 @@ module.exports = {
        return m.reply("Masukkan Pertanyaan Kepada Selxyzz-Assistant")
      }
      try {
-       let api = await axios.get(`https://apisanz.my.id/ai/selxyz-assistant?text=${text}`)
+       let api = await axios.get(`https://server.apisanz.my.id/ai/selxyz-assistant?text=${text}`)
        let tes = api.data.data
        await m.reply(tes)
      } catch (e) {

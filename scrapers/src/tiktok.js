@@ -98,6 +98,34 @@ class Tiktok {
     }
     });
    }
+  stalk = async function stalk(nickname) {
+     return new Promise(async(resolve, reject) => {
+     const headers = {
+          "Referer": 'https://countik.com/user/@' + nickname,
+        "User-Agent": require("fake-useragent")()
+    }
+      await axios.get(`https://countik.com/api/exist/${nickname.toLowerCase()}`, { headers })
+     .then(async(a) => {
+         let id = a.data.sec_uid
+         if (!id) reject({
+            msg: "ID tidak ditemukan !"
+        })
+        let { data } = await axios.get(`https://countik.com/api/userinfo?sec_user_id=${id}`, { headers }).catch(e => e.response);
+       if (!data.followerCount) return reject({
+        msg: "Username Tiktok tidak ditemukan !"
+      })
+       resolve({
+           nickname: a.data.nickname,
+           avatar: data.avatarThumb,
+           country: data.country,
+           followers: data.followerCount.toLocaleString(),
+           following: data.followingCount.toLocaleString(),
+           bio: data.signature,
+           heart: data.heartCount.toLocaleString()
+          })
+      }).catch((e) => reject({ msg: "Gagal mendapatkan data  dari Web", error: e.response.data }))
+    })
+  }
 }
 
 module.exports = new Tiktok()

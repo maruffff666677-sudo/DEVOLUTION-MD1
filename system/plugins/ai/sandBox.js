@@ -15,7 +15,7 @@ module.exports = {
        return m.reply("Masukkan Pertanyaan Anda Kepada SanBox.")
      }
      try {
-       let api = await axios.get(`https://apisanz.my.id/ai/sandbox?text=${text}`)
+       let api = await axios.get(`https://server.apisanz.my.id/ai/sandbox?text=${text}`)
        let pesan = api.data.data;
        if (!pesan) {
          return m.reply("Tidak Ada Jawaban Dari Ai")

@@ -27,8 +27,14 @@ module.exports = {
                     await sock.sendMessage(m.cht, { text: updatedMessage, edit: key }, { quoted: m });
 
                     setTimeout(async () => {
-                        updatedMessage += "\n\n🌟 *Vano* - Terima kasih telah menjadi pengurus dan pemimpin dalam pemeliharaan serta pembijakan REST API, yang memungkinkan bot ini menggunakan REST API untuk berkembang lebih jauh dan efisien di masa depan! 🧑‍💻\n\n> `REST API OFFICIAL`\n> https://aniravecdo.online\n> https://devolution-cyan.vercel.app\n> https://restapii.rioooxdzz.web.id/";
+                        updatedMessage += "\n\n🌟 *Vano* - Terima kasih telah menjadi pengurus dan pemimpin dalam pemeliharaan serta pembijakan REST API, yang memungkinkan bot ini menggunakan REST API untuk berkembang lebih jauh dan efisien di masa depan! 🧑‍💻";
+
                         await sock.sendMessage(m.cht, { text: updatedMessage, edit: key }, { quoted: m });
+
+                        setTimeout(async () => {
+                            updatedMessage += "\n\n🌟 *Axell* - Terima kasih telah menyediakan base bot ini sehingga pengembangan fitur dapat dilakukan dengan baik dan terstruktur! 🛠️\n\n> `REST API OFFICIAL`\n> https://aniravecdo.online\n> https://devolution-cyan.vercel.app\n> https://restapii.rioooxdzz.web.id/\n> https://server.apisanz.my.id";
+                            await sock.sendMessage(m.cht, { text: updatedMessage, edit: key }, { quoted: m });
+                        }, 1000);
                     }, 1000);
                 }, 1000);
             }, 1000);

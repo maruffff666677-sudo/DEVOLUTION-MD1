@@ -8,15 +8,15 @@ module.exports = {
   description: "Download video/slide dari tiktok",
   loading: true,
   async run(m, { sock, Func, text, Scraper, config }) {
-    if (!/tiktok.com/.test(text) || !text)
+    if (!Func.isUrl(m.text) || !/tiktok.com/.test(m.text) || !m.text)
       throw `> Reply atau masukan link tiktok yang ingin di download`;
 
-    await Scraper.tiktok.download(text).then(async (a) => {
+    await Scraper.tiktok.download(m.text).then(async (a) => {
       let size = Func.formatSize(a.size);
       let limit = Func.sizeLimit(size, db.list().settings.max_upload);
       if (limit.oversize)
         return m.reply(
-          `> Maaf Video tidak Dapat diputar karena melebihi maksimal ukuran *( ${size} )*, Maksimal ukuran untuk pengguna Free adalah *50MB*, Upgrade ke premium agar dapat meningkatkan maksimal ukuran hingga *1GB*!`
+          `> Maaf Video tidak Dapat diputar karena melebihi maksimal ukuran *( ${size} )*, Maksimal ukuran untuk pengguna Free adalah *50MB*, Upgrade ke premium agar dapat meningkatkan maksimal ukuran hingga *1GB* !`,
         );
 
       let cap = `*– 乂 Tiktok - Downloader*\n`;
@@ -25,43 +25,13 @@ module.exports = {
       cap += `> *- Ukuran File :* ${Func.formatSize(a.size)}\n`;
       cap += `> *- Penonton :* ${Func.h2k(a.play_count)}\n`;
       cap += `> *- Tipe :* ${a.images ? "Slide Show" : "Video"}`;
-
+      await sock.sendFile(m.cht, a.author.avatar, null, cap, m);
       if (a.images) {
-        let slides = [];
-        for (let i = 0; i < a.images.length; i++) {
-          slides.push({
-            title: `Slide ${i + 1}`,
-            description: `Slide dari TikTok`,
-            rowId: `slide_${i + 1}`,
-            mediaUrl: a.images[i],
-          });
+        for (let i of a.images) {
+          await sock.sendFile(m.cht, i, null, cap, m);
         }
-
-        const sections = [
-          {
-            title: "Daftar Slide",
-            rows: slides.map((s) => ({
-              title: s.title,
-              description: s.description,
-              rowId: s.rowId,
-            })),
-          },
-        ];
-
-        const listMessage = {
-          text: cap,
-          footer: "Tiktok Downloader",
-          title: "Slide Show TikTok",
-          buttonText: "Lihat Slide",
-          sections,
-        };
-
-        await sock.sendMessage(m.cht, listMessage);
       } else {
-        await sock.sendFile(m.cht, a.play, null, cap, m);
-      }
-
-      if (a.music_info) {
+        let q = await sock.sendFile(m.cht, a.play, null, cap, m);
         await sock.sendFile(m.cht, a.music_info.play, null, "", m, {
           mimetype: "audio/mpeg",
           contextInfo: {

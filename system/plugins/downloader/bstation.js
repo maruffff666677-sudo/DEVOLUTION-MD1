@@ -1,83 +1,56 @@
-const { proto, generateWAMessageFromContent } = require('baileys');
+const axios = require("axios");
 
 module.exports = {
-    command: "bstation",
-    alias: ["bst"],
-    category: ["downloader"],
-    settings: {
-        limit: true
-    },
-    description: "*⚡ Unduh Video dari Bstation Anda ⚡*",
-    loading: true,
-    async run(m, { text, sock, config }) {
-        const apikey = config.apikey 
-        try {
-            if (text.includes('https://')) {
-                let res = await fetch(`https://aniravecdo.online/api/downloader/bstationdl?url=${text.trim()}&apikey=${apikey}`);
-                let info = await res.json();
-                const videoData = Buffer.from(info.base64, 'base64');
+  command: "bstation",
+  alias: ["blibili"],
+  category: ["downloader"],
+  settings: {
+    limit: true,
+  },
+  description: "Mencari/download video dari bstation",
+  loading: true,
+  async run(m, { sock, Func, Scraper, text }) {
+    if (!text)
+      throw `> *乂 Cara Penggunaan :*
+> *-* Masukan Query untuk mencari video
+> *-* Masukan Url untuk mendownload video
 
-                await sock.sendMessage(m.cht, {
-                    video: videoData,
-                    caption: `*🎥 Title:* ${info.info.title}\n*🔗 URL:* ${text.trim()}`
-                }, { quoted: m });
+> *乂 Contoh Penggunaan :*
+> *- ${m.prefix + m.command} Video lucu*
+> *- ${m.prefix + m.command} https://www.bilibili.tv/id/video/4793262300860416*`;
 
-            } else {
-                let res = await fetch(`https://aniravecdo.online/api/searcher/bstationsearch?q=${text}&apikey=${apikey}`);
-                res = await res.json();
-                let items = res.result.slice(0, 10);
+    if (Func.isUrl(text)) {
+      let data = await Scraper.bstation.download(text);
+      let buffer = await Func.fetchBuffer(data.download.url);
 
-                let carouselCards = await Promise.all(
-                    items.map(async (a) => ({
-                        body: proto.Message.InteractiveMessage.Body.fromObject({
-                            text: `*🎬 Title:* ${a.title}\n*👤 Author:* ${a.author.nickname || 'Unknown'}\n*⏱ Duration:* ${a.duration}\n*👁 Views:* ${a.view}`
-                        }),
-                        footer: proto.Message.InteractiveMessage.Footer.fromObject({
-                            text: "*🔽 Pilih tombol Download untuk mengunduh.*"
-                        }),
-                        header: proto.Message.InteractiveMessage.Header.fromObject({
-                            hasMediaAttachment: true,
-                            imageMessage: a.cover 
-                                ? await createImage(a.cover) 
-                                : await createImage('https://files.catbox.moe/rmcoi5.jpg')
-                        }),
-                        nativeFlowMessage: proto.Message.InteractiveMessage.NativeFlowMessage.fromObject({
-                            buttons: [
-                                {
-                                    "name": "cta_url",
-                                    "buttonParamsJson": `{"display_text":"⬇️ Download","url":"https://wa.me/6285184448387?text=.bstation ${a.url}","merchant_url":"${a.url}"}`
-                                }
-                            ]
-                        })
-                    }))
-                );
+      let size = Func.formatSize(buffer.length);
+      let limit = Func.sizeLimit(size, db.list().settings.max_upload);
+      if (limit.oversize)
+        throw `Maaf saya tidak dapat mengunduh video bstation karena ukuran video tersebut memiliki batas ukuran yang ditentukan *( ${size} )*, Upgrade status ke premium agar dapat download video hingga *1GB* !`;
 
-                const carouselMessage = generateWAMessageFromContent(m.chat, {
-                    viewOnceMessage: {
-                        message: {
-                            messageContextInfo: { deviceListMetadata: {}, deviceListMetadataVersion: 2 },
-                            interactiveMessage: proto.Message.InteractiveMessage.fromObject({
-                                body: proto.Message.InteractiveMessage.Body.create({
-                                    text: `*✨ Total Pencarian Bstation:* ${items.length} Video ✨*`
-                                }),
-                                footer: proto.Message.InteractiveMessage.Footer.create({
-                                    text: "*⚡ DEVOLUTION-MD1 ⚡*"
-                                }),
-                                header: proto.Message.InteractiveMessage.Header.create({
-                                    hasMediaAttachment: false
-                                }),
-                                carouselMessage: proto.Message.InteractiveMessage.CarouselMessage.fromObject({
-                                    cards: carouselCards
-                                })
-                            })
-                        }
-                    }
-                }, { quoted: m });
+      console.log("Compression completed, sending video...");
+      let cap = `*– 乂 Bstation - Downloader*
+`;
+      cap += Object.entries(data.metadata)
+        .map(([a, b]) => `> *- ${a.capitalize()} :* ${b}`)
+        .join("\n");
 
-                await sock.relayMessage(m.chat, carouselMessage.message, { messageId: carouselMessage.key.id });
-            }
-        } catch (error) {
-            m.reply(`*❌ Terjadi Kesalahan!*\n\n${error.message}`);
-        }
+      m.reply({
+        video: buffer,
+        caption: cap,
+      });
+    } else {
+      let data = await Scraper.bstation.search(text);
+      let cap = `*– 乂 Bstation - search*
+`;
+      cap += `> Ketik *${m.prefix + m.command} ${data[0].url}* untuk mendownload video dari bstation\n\n`;
+      cap += data
+        .map(
+          (res, index) =>
+            `*${index + 1}.* ${res.title}\n> *- Penonton :* ${res.views}\n> *- Durasi :* ${res.duration}\n> *- Author :* ${res.author.name}\n> *- Url :* ${res.url}`,
+        )
+        .join("\n\n");
+      m.reply(cap);
     }
+  },
 };

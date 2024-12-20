@@ -19,9 +19,7 @@ module.exports = {
 
       if (response.success) {
         let aiReply = response.data.choices[0]?.message?.content || "Tidak ada jawaban.";
-        // Mengganti ** menjadi * pada respons AI
         aiReply = aiReply.replace(/\*\*/g, "*");
-        // Mengganti ### menjadi tabulasi
         aiReply = aiReply.replace(/###/g, "\t");
         aiReply = aiReply.replace(/##/g, "\t");
         await m.reply(aiReply);

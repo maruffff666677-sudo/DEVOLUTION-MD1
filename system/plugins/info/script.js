@@ -8,9 +8,9 @@ module.exports = {
         const teks = `
 🌐 *🌟 DEVOLUTION-MD1: Membuka Era Baru Bot WhatsApp 🌟* 🌐  
 
-*📌 Versi: 1.0.0 – Stabil & Siap Eksplorasi!*  
+*📌 Versi: 1.0.4 – Stabil & Siap Eksplorasi!*  
 
-*Halo @${m.sender.split('@')[0]}!*
+*Halo @${m.sender.split('@')[0]}!*  
 Kami dari *🚀 DEVOLUTION-DEVELOPMENT 🚀*, dengan bangga mempersembahkan _*DEVOLUTION-MD1*_ – script bot WhatsApp *modern* yang dirancang untuk memenuhi kebutuhan pengguna era digital.  
 
 📚 *💡 Tentang DEVOLUTION-MD1 💡*  
@@ -22,8 +22,9 @@ Kami dari *🚀 DEVOLUTION-DEVELOPMENT 🚀*, dengan bangga mempersembahkan _*DE
 - *Selxyzz* – 🌐 *Koordinator Pengembangan Teknis*  
 - *Haidar* – 🎨 *Spesialis Solusi Kreatif*  
 - *Sanzz* – 🔌 *Pengurus REST API*  
-- *Rioo* – 🔧 *Pengurus REST API*  
+- *Rioo* – 🔧 *Pengurus Fitur Case*  
 - *Vano* – 🛡️ *Pemimpin & Kebijakan Penggunaan REST API*  
+- *Axel* – 🛠️ *Penyedia Base Bot & Dasar Sistem DEVOLUTION-MD1*  
 
 🔗 *📂 Akses Script Resmi:*  
 ✈ https://github.com/DEVOLUTION-BOT/DEVOLUTION-MD1  
@@ -42,6 +43,6 @@ Kami dari *🚀 DEVOLUTION-DEVELOPMENT 🚀*, dengan bangga mempersembahkan _*DE
 *Salam hangat penuh semangat,*  
 *💻 DEVOLUTION-DEVELOPMENT 💻*  
         `;
-        await m.reply(teks, { mentions: [m.sender] });
+        await sock.sendMessage(m.cht, { text: teks, mentions: [m.sender] }, { quoted: m });
     }
 };

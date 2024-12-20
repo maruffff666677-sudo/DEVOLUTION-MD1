@@ -14,7 +14,7 @@ module.exports = {
       return m.reply('Masukkan Pertanyaan Anda')
     }
     try {
-      let response = await axios.get(`https://apisanz.my.id/ai/iask?text=${text}`);
+      let response = await axios.get(`https://server.apisanz.my.id/ai/iask?text=${text}`);
       let ans = response.data.data.answer;
       await m.reply(ans);
     } catch (e) {

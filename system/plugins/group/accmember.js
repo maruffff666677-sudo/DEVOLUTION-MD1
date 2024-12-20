@@ -3,12 +3,24 @@ module.exports = {
    alias: ["accmem"],
    category: ["group"],
    settings: {
-     group: true
+      group: true
    },
    description: "Acc Member Atau Melihat List Acc",
    loading: true,
    async run(m, { text, sock }) {
-      if (!text) return m.reply("*⚠️ Perintah tidak valid! ⚠️*\nGunakan:\n- *acc list*\n- *acc approve [nomor]*\n- *acc reject [nomor]*\n- *acc reject [JID]*\n- *acc reject/approve all* untuk menolak/menyetujui semua permintaan bergabung. 🚫✅");
+      if (!m.isAdmin) return m.reply("*⚠️ Perintah ini hanya dapat digunakan oleh admin grup! ⚠️*");
+      if (!m.isBotAdmin) return m.reply("*⚠️ Bot harus menjadi admin untuk menggunakan fitur ini! ⚠️*");
+
+      if (!text) {
+         return m.reply(
+            "*⚠️ Perintah tidak valid! ⚠️*\nGunakan:\n" +
+            "- *acc list*\n" +
+            "- *acc approve [nomor]*\n" +
+            "- *acc reject [nomor]*\n" +
+            "- *acc reject [JID]*\n" +
+            "- *acc reject/approve all* untuk menolak/menyetujui semua permintaan bergabung. 🚫✅"
+         );
+      }
 
       try {
          let groupId = m.cht;
@@ -24,8 +36,13 @@ module.exports = {
 
          if (subCommand === "list") {
             const formattedList = joinRequestList.length > 0 ?
-               joinRequestList.map((request, i) => `*${i + 1}.*\n• Nomor: ${request.jid.split('@')[0]}\n• Metode Permintaan: ${request.request_method}\n• Waktu Permintaan: ${formatDate(request.request_time)}\n\n`).join('') :
+               joinRequestList.map((request, i) => 
+                  `*${i + 1}.*\n• Nomor: ${request.jid.split('@')[0]}\n` +
+                  `• Metode Permintaan: ${request.request_method}\n` +
+                  `• Waktu Permintaan: ${formatDate(request.request_time)}\n\n`
+               ).join('') :
                "*❌ Tidak ada permintaan bergabung yang tertunda.* 🕒";
+
             m.reply(`*📋 Daftar Permintaan Bergabung:*\n\n${formattedList}`);
          }
 

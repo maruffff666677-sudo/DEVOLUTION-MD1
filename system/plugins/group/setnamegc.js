@@ -1,22 +1,20 @@
 module.exports = {
-  command: "setnamegc",
-  alias: ["gcname"],
+  command: "setnamegroup",
+  alias: ["setnamegc"],
   category: ["group"],
   settings: {
-    group: true
+    group: true,
+    admin: true,
+    botAdmin: true,
   },
-  description: "🔑 *Ubah Nama Group* 💬",
-  loading: true,
-  async run(m, { text, sock }) {
-    try {
-      if (!m.isAdmins) return m.reply("❌ *Kamu Bukan Admin Grup* 😔");
-      if (!m.isBotAdmins) return m.reply("⚠️ *Devolution Tidak Admin, Perintah Tidak Valid* 🚫");
-      if (text.length < 1) return m.reply(`💡 *Contoh Penggunaan*: ${prefix + command} <Nama Grup>`);
-      await sock.groupUpdateSubject(m.cht, text);
-      m.reply(`🎉 *Sukses Mengganti Nama Grup Menjadi*: "${text}" 🎉`);
-    } catch (error) {
-      console.error(error);
-      m.reply("❌ *Terjadi Kesalahan, Gagal Mengubah Nama Grup* 🚫");
-    }
-  }
+  description: "Untuk mengganti nama group",
+  async run(m, { sock, text }) {
+    if (!text) throw "> Masukan Nama group baru nya";
+    if (text.length > 20) throw "> Buset panjang amat, Maksimal 20 karakter!";
+    await sock.groupUpdateSubject(m.cht, text);
+    m.reply(
+      `> *Berhasil mengganti nama group menjadi :*
+ > ${text}`,
+    );
+  },
 };
