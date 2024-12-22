@@ -79,11 +79,11 @@ ${matches.map((a, i) => ` ${i + 1}. *${m.prefix + a}*`).join("\n")}`;
             forwardingScore: 127,
             forwardedNewsletterMessageInfo: {
                 newsletterJid: "120363329425162176@newsletter",
-                newsletterName: "Dᴇᴠᴏʟᴜᴛɪᴏɴ | 𝟷.𝟶.𝟷",
+                newsletterName: "Dᴇᴠᴏʟᴜᴛɪᴏɴ | 𝟷.𝟶.6",
                  serverMessageId: -1
              },
                 externalAdReply: {
-                    title: "DEVOLUTION-MD1 v1.0.1",
+                    title: "DEVOLUTION-MD1 v1.0.6",
                     body: "Saya siap membantu Anda!",
                     mediaType: 1,
                     thumbnailUrl: "https://img100.pixhost.to/images/950/543947535_rizz.jpg",
