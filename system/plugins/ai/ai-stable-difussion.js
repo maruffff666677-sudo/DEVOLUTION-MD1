@@ -15,7 +15,7 @@ module.exports = {
         return m.reply(`Penggunaan Anda Salah!\n\n> ${m.prefix + m.command} Girl in cross`)
      }
      try {
-        let api = await axios.get(`https://aniravecdo.online/api/ai/t2image1?q=${text}&apikey=` + config.apikey);
+        let api = await axios.get(`https://anira.site/api/ai/t2image1?q=${text}&apikey=` + config.apikey);
         let result = api.data.result;
 
         if (result && result.length > 0) {

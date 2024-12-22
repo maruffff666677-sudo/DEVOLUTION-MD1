@@ -89,10 +89,11 @@ module.exports = async (m, sock, store) => {
                 }).then(async(a) => {
              if (plugin?.settings?.limit && !isPrems && !m.isOwner) {
                  db.list().user[m.sender].limit -= 1
-                 m.reply(`> Kamu telah menggunakan fitur limit\n> *- Limit anda :* ${db.list().user[m.sender].limit} tersisa ☘️\n> *- Note :* Limit akan direset pada pukul 02:00 WIB`);
+                 m.reply(`✔ 1 Limit Anda Terpakai`);
                 }             
              });
            if (plugin.loading) m.react("🕐");
+           if (plugin.maintenance) m.reply(config.messages.maintenance);
         }
     } catch (error) {
         if (error.name) {

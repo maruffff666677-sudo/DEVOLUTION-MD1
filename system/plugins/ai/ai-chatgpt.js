@@ -2,7 +2,7 @@ const axios = require('axios');
 
 module.exports = {
    command: "chatgpt",
-   alias: ["gpt"],
+   alias: ["gptchat"],
    category: ["ai"],
    settings: {
      limit: true,

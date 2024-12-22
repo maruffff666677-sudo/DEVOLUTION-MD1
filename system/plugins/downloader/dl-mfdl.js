@@ -15,7 +15,7 @@ module.exports = {
       return m.reply('❌ *URL tidak valid!* Pastikan URL Mediafire benar. 🔗');
     }
     try {
-      const response = await fetch(`https://restapii.rioooxdzz.web.id/api/mediafire?url=${text}`);
+      const response = await fetch(`https://restapi.apibotwa.biz.id/api/mediafire?url=${text}`);
       const json = await response.json();
       
       if (!json.data.response) throw '❌ *Gagal mengambil data!*';

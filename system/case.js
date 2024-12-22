@@ -294,7 +294,30 @@ class Sticker {
 
         default:
             // Eval command untuk owner
-
+        if (
+        [">", "eval", "=>"].some((a) =>
+          m.command.toLowerCase().startsWith(a),
+        ) &&
+        m.isOwner
+      ) {
+        let evalCmd = "";
+        try {
+          evalCmd = /await/i.test(m.text)
+            ? eval("(async() => { " + m.text + " })()")
+            : eval(m.text);
+        } catch (e) {
+          evalCmd = e;
+        }
+        new Promise((resolve, reject) => {
+          try {
+            resolve(evalCmd);
+          } catch (err) {
+            reject(err);
+          }
+        })
+          ?.then((res) => m.reply(util.format(res)))
+          ?.catch((err) => m.reply(util.format(err)));
+      }
             // Exec command untuk owner
             if (["exec", "$"].includes(m.command.toLowerCase()) && m.isOwner) {
                 try {

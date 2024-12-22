@@ -32,7 +32,7 @@ module.exports = {
                         await sock.sendMessage(m.cht, { text: updatedMessage, edit: key }, { quoted: m });
 
                         setTimeout(async () => {
-                            updatedMessage += "\n\n🌟 *Axell* - Terima kasih telah menyediakan base bot ini sehingga pengembangan fitur dapat dilakukan dengan baik dan terstruktur! 🛠️\n\n> `REST API OFFICIAL`\n> https://aniravecdo.online\n> https://devolution-cyan.vercel.app\n> https://restapii.rioooxdzz.web.id/\n> https://server.apisanz.my.id";
+                            updatedMessage += "\n\n🌟 *Axell* - Terima kasih telah menyediakan base bot ini sehingga pengembangan fitur dapat dilakukan dengan baik dan terstruktur! 🛠️\n\n> `REST API OFFICIAL`\n> https://anira.site\n> https://server.apisanz.my.id\n> https://restapi.apibotwa.biz.id/";
                             await sock.sendMessage(m.cht, { text: updatedMessage, edit: key }, { quoted: m });
                         }, 1000);
                     }, 1000);

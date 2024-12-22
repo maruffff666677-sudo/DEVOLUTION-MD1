@@ -21,6 +21,7 @@ const config = {
       wait: "*( Loading )* Tunggu Sebentar...",
       owner: "*( Denied )* Kamu bukan owner ku !",
       premium: "*( Denied )* Fitur ini khusus user premium",
+      maintenance: "*( Denied )* Fitur Sedang Maintenance Mohon Bersabar, Lagi Di Perbaiki!", 
       group: "*( Denied )* Fitur ini khusus group",
       botAdmin: "*( Denied )* Fitur ini hanya bisa di akses hanya ketika bot menjadi admin.*"
    },

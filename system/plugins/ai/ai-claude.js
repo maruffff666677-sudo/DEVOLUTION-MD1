@@ -13,7 +13,7 @@ module.exports = {
       if (!text) return m.reply("❌ *Masukkan pertanyaan yang ingin kamu ajukan ke Claude!*");
 
       try {
-         const response = await axios.get(`https://aniravecdo.online/api/ai/claude?q=${text}&apikey=` + config.apikey);
+         const response = await axios.get(`https://anira.site/api/ai/claude?q=${text}&apikey=` + config.apikey);
          const result = response.data.result;
 
          if (result) {

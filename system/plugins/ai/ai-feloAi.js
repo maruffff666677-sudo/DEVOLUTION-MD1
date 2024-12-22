@@ -15,7 +15,7 @@ module.exports = {
             });
          }
 
-         const apiUrl = `https://restapii.rioooxdzz.web.id/api/felo?query=${encodeURIComponent(text)}`;
+         const apiUrl = `https://restapi.apibotwa.biz.id/api/felo?query=${encodeURIComponent(text)}`;
          const response = await fetch(apiUrl);
          const result = await response.json();
 

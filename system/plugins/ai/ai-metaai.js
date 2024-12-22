@@ -13,7 +13,7 @@ module.exports = {
           "Mana teks yang ingin kamu tanyakan? 🤔 Contoh: meta-ai Halo, apa kabar?"
         );
       }
-    await m.reply("*🌦 Membuat Response*") 
+     await m.reply("Typing..")
       const Together = require("together-ai");
       const together = new Together({
         apiKey: "0e5ec1d9c95daba7628be74f38bf0ec5a4f9592daa5461a20427ad075d12f6a3", 
@@ -22,7 +22,7 @@ module.exports = {
       const initialMessages = [
         {
           role: "system",
-          content: `Hai! 😊 Saya adalah ChatGPT yang menggunakan model Meta LLaMA. Saya dibuat oleh Devolution ~ Development.
+          content: `Hai! 😊 Saya adalah Meta Ai yang menggunakan model Meta LLaMA. Saya dibuat oleh Devolution ~ Development.
                 Saya adalah asisten bot yang dapat menyimpan nama Anda sebagai "${
               m.pushName || "User"
             }", berbicara dalam bahasa Indonesia, dan selalu berusaha membantu dengan cara yang ramah dan menyenangkan. Ayo ngobrol!`,
