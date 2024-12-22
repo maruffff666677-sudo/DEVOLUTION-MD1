@@ -55,7 +55,11 @@ module.exports = async (m, sock, store) => {
              })) continue;
            }
             const Scraper = await scraper.list();
-            const cmd = m.command.toLowerCase() === plugin.command || plugin?.alias?.includes(m.command.toLowerCase());
+            const reaction = (emoji) => {
+             m.react(emoji)}
+            const cmd = m.command.toLowerCase().startsWith(m.prefix) && 
+    (m.command.toLowerCase().slice(m.prefix.length) === plugin.command || 
+    plugin?.alias?.includes(m.command.toLowerCase().slice(m.prefix.length)));
           try {
             if (cmd) {
                 let text = m.text;
@@ -83,6 +87,7 @@ module.exports = async (m, sock, store) => {
                     Uploader,
                     store,
                     isAdmin,
+                    reaction, 
                     botAdmin,
                     isPrems,
                     isBanned
