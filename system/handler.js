@@ -55,8 +55,6 @@ module.exports = async (m, sock, store) => {
              })) continue;
            }
             const Scraper = await scraper.list();
-            const reaction = (emoji) => {
-             m.react(emoji)}
             const cmd = m.command.toLowerCase().startsWith(m.prefix) && 
     (m.command.toLowerCase().slice(m.prefix.length) === plugin.command || 
     plugin?.alias?.includes(m.command.toLowerCase().slice(m.prefix.length)));
@@ -87,18 +85,17 @@ module.exports = async (m, sock, store) => {
                     Uploader,
                     store,
                     isAdmin,
-                    reaction, 
                     botAdmin,
                     isPrems,
                     isBanned
                 }).then(async(a) => {
              if (plugin?.settings?.limit && !isPrems && !m.isOwner) {
                  db.list().user[m.sender].limit -= 1
-                 m.reply(`✔ 1 Limit Anda Terpakai`);
+                 m.reply(`1 Limit Anda Terpakai ✔`);
                 }             
              });
            if (plugin.loading) m.react("🕐");
-           if (plugin.maintenance) m.reply(config.messages.maintenance);
+           if (plugin.maintenance) m.reply(config.messages.maintenance)
         }
     } catch (error) {
         if (error.name) {

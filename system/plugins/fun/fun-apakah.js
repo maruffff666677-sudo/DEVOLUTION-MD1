@@ -1,9 +1,3 @@
-/*
-🔥🔥🔥 Jangan hapus wm ini atau kamu mati 🔥🔥🔥
-💥💥💥 Fitur -> Jawaban Acak "Apakah" 💥💥💥
-🔗 🔥 https://whatsapp.com/channel/0029VamzFetC6ZvcD1qde90Z 🔥
-*/
-
 module.exports = {
    command: "apakah",
    alias: ["apakah", "apaka"],

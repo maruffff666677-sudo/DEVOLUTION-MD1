@@ -10,18 +10,19 @@ const fs = require('node:fs');
 const config = {
     owner: ["6282181938329", "62895326884022"],
     name: "~ Devolution",
+    botNumber: "6283168629450", 
     sessions: "Devo-Sessions",
     sticker: {
       packname: "Devolution",
       author: "Selxyzz"
     },
-    apikey: "5SdBTI3hMfDFIOZxJ7",
+    apikey: "cKhWMontjkfJbbewZf", //Jika Feature Rest Api Yang Menggunakan Apikey Ini Gk Berfungsi Maka Daftar Ulang Ke Rest Api anira.site Dan Dapatkan Apikey Baru Anda.
     apikeyPrem: "pasonki23",
    messages: {
       wait: "*( Loading )* Tunggu Sebentar...",
       owner: "*( Denied )* Kamu bukan owner ku !",
       premium: "*( Denied )* Fitur ini khusus user premium",
-      maintenance: "*( Denied )* Fitur Sedang Maintenance Mohon Bersabar, Lagi Di Perbaiki!", 
+      maintenance: "*( Denied )* Fitur Sedang Maintenance Mohon Bersabar, Segera Perbaiki!", 
       group: "*( Denied )* Fitur ini khusus group",
       botAdmin: "*( Denied )* Fitur ini hanya bisa di akses hanya ketika bot menjadi admin.*"
    },

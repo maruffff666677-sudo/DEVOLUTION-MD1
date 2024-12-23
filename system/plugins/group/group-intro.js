@@ -10,14 +10,14 @@ module.exports = {
     description: "Menampilkan template perkenalan untuk user baru",
     async run(m, { sock }) {
       const introTemplate = 
-        `╭─── *INTRO PERKENALAN* ───╮\n` +
-        `Silakan isi format berikut untuk memperkenalkan diri:\n\n` +
-        `Nama: \n` +
-        `Umur: \n` +
-        `Gender: \n` +
-        `Status: \n` +
-        `Alasan Join: ` +
-        `╰─────────────────────╯`;
+        `➩ intro
+✩ nama :
+✩ kelas :
+✩ umur :
+✩ hobi :
+✩ askot :
+☆ gender :
+Salken mem baruuᥫ᭡`
   
       await sock.sendMessage(
         m.cht,

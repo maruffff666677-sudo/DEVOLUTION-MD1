@@ -86,7 +86,7 @@ ${matches.map((a, i) => ` ${i + 1}. *${m.prefix + a}*`).join("\n")}`;
                     title: "DEVOLUTION-MD1 v1.0.6",
                     body: "Saya siap membantu Anda!",
                     mediaType: 1,
-                    thumbnailUrl: "https://img100.pixhost.to/images/950/543947535_rizz.jpg",
+                    thumbnailUrl: "https://img101.pixhost.to/images/17/545237685_skyzopedia.jpg",
                     sourceUrl: "https://restapii.rioooxdzz.web.id/",
                 },
             },

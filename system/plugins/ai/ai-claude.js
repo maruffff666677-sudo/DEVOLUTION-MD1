@@ -22,7 +22,7 @@ module.exports = {
             await m.reply("⚠️ *Claude tidak memberikan jawaban. Coba lagi nanti!*");
          }
       } catch (error) {
-         await m.reply("🚨 *Terjadi kesalahan saat memproses permintaanmu. Harap coba lagi!*" + e.message);
+         await m.reply("🚨 *Terjadi kesalahan saat memproses permintaanmu. Harap coba lagi!*" + error.message);
       }
    }
 };

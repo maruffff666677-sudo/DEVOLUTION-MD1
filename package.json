@@ -16,7 +16,7 @@
   "keywords": [
     "botwa"
   ],
-  "author": "Axel_Team",
+  "author": "Devolution-Development",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/Axel/nekoBot/issues"
@@ -39,7 +39,7 @@
     "js-beautify": "^1.15.1",
     "moment-timezone": "^0.5.46",
     "nik-parser": "^1.0.1",
-    "node-fetch": "npm:undici@^6.20.1",
+    "node-fetch": "^2.7.0",
     "node-webpmux": "^3.2.0",
     "node-cron": "^3.0.3",
     "pino": "^9.5.0",

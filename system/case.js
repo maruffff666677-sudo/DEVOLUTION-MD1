@@ -244,7 +244,7 @@ class Sticker {
     return imageUrls;
   }
 }
-    m.react("🕖 ") 
+    m.react("🕖") 
   try {
     if (m.text) {
       const stickerUrl = m.text.trim();
@@ -293,6 +293,21 @@ class Sticker {
         }
 
         default:
+        if (m.body.startsWith('@6283168629450')) {
+         if (!m.text || !m.quoted.text) {
+            return m.reply("Masukkan Pertanyaan Mu Bree🤣")
+         }
+         let input = m.text ? m.text : m.quoted.text
+          const apiResponse = await fetch(`https://anira.site/api/ai/claude?q=${encodeURIComponent(text)}&apikey=${config.apikey}`);
+            const json = await apiResponse.json();
+
+            if (!json || !json.result) {
+                return m.reply("Tidak dapat menerima respons dari AI. Coba lagi nanti.");
+            }
+
+            const cleanedResponse = json.result.replace(/\*\*/g, "*");
+            await m.reply(cleanedResponse);
+        }
             // Eval command untuk owner
         if (
         [">", "eval", "=>"].some((a) =>

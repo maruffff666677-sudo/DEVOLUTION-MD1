@@ -18,9 +18,9 @@ module.exports = {
          return m.reply('❌ Lagu yang Anda cari tidak ditemukan...');
       }
       let result = convert.all[0];
-      let api = await fetch(`https://restapi.riooxdzz.me/api/ytmp3?url=${result.url}`);
+      let api = await fetch(`https://restapi.apibotwa.biz.id/api/ytmp3?url=${result.url}`);
       let ress = await api.json();
-      let urlAudio = ress.data.response.link
+      let urlAudio = ress.data.url;
       let DEVOLUTION = `✨🎶 *[ PLAY - YOUTUBE ]* 🎶✨\n`;
       DEVOLUTION += `🎵 *Title*: ${result.title}\n`;
       DEVOLUTION += `🆔 *ID*: ${result.videoId}\n`;

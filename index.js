@@ -87,7 +87,7 @@ const store = makeInMemoryStore({
   console.log(chalk.white.bold("~~ ᴛʜᴀɴᴋs ғᴏʀ ᴜsɪɴɢ ᴍʏ sᴄʀɪᴘᴛ"))
   console.log(chalk.white.bold("[ ɴᴏᴛᴇs ] ғᴏʟʟᴏᴡ ɢɪᴛʜᴜʙ sᴀʏᴀ ᴀᴛᴀᴜ ᴄᴇᴋ ʏᴀɴɢ ʙᴀʀᴜ ᴜᴘᴅᴀᴛᴇ" + chalk.cyan.bold("https://github.com/DEVOLUTION-BOT")))
   console.log(chalk.white.bold("––––––––––––––––––––"))
-  
+     
 async function system() {
   const { 
      state,
@@ -206,7 +206,7 @@ sock.ev.on('group-participants.update', ({ id, participants, action }) => {
             return msg
         }
         return {
-            conversation: "Devolution"
+            conversation: "NekoBot"
         }
     }
 sock.ev.on("messages.upsert", async (cht) => {
@@ -234,7 +234,7 @@ async function getMessage(key) {
             return msg
         }
         return {
-            conversation: "Devolution"
+            conversation: "NekoBot"
         }
     }
    sock.ev.on('messages.update', 
