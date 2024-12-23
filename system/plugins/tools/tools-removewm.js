@@ -1,7 +1,7 @@
 module.exports = {
    command: "no-wm",
    alias: ["removewm"],
-   category: ["utility"],
+   category: ["tools"],
    settings: {
       limit: true
    },
