@@ -294,11 +294,12 @@ class Sticker {
 
         default:
         if (m.body.startsWith('@6283168629450')) {
-         if (!m.text || !m.quoted.text) {
+         if (!text && !m.quoted.body) {
             return m.reply("Masukkan Pertanyaan Mu Bree🤣")
          }
-         let input = m.text ? m.text : m.quoted.text
-          const apiResponse = await fetch(`https://anira.site/api/ai/claude?q=${encodeURIComponent(text)}&apikey=${config.apikey}`);
+         m.react("☘️");
+         let input = text ? text : m.quoted.body
+          const apiResponse = await fetch(`https://anira.site/api/ai/claude?q=${encodeURIComponent(input)}&apikey=${config.apikey}`);
             const json = await apiResponse.json();
 
             if (!json || !json.result) {
