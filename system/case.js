@@ -426,6 +426,38 @@ class Sticker {
         }
 
         default:
+        if (db.list().group[m.cht].antilinkv1) {
+            if (m.body.match('https://')) {
+                const adminMessage = `⚡ 𝗣𝗲𝗿𝗶𝗻𝗴𝗮𝘁𝗮𝗻
+🔒 Kamu Admin Kamu Aman Bree🤣`;
+        
+                if (!m.isAdmin) return m.reply(adminMessage);
+                if (!m.key.fromMe) return m.reply(adminMessage);
+                if (!m.isOwner) return m.reply(adminMessage);
+        
+                await sock.sendMessage(m.cht, {
+                    delete: {
+                        remoteJid: m.cht,
+                        fromMe: false,
+                        id: m.key.id,
+                        participant: m.key.participant
+                    }
+                });
+        
+                const warningText = `🛡️ 𝗦𝗶𝘀𝘁𝗲𝗺 𝗔𝗻𝘁𝗶𝗹𝗶𝗻𝗸
+        
+⚠️ 𝗣𝗲𝗺𝗯𝗲𝗿𝗶𝘁𝗮𝗵𝘂𝗮𝗻:
+Demi keamanan grup, pengiriman tautan tidak diizinkan.        
+🔒 𝗧𝗶𝗻𝗱𝗮𝗸𝗮𝗻:
+Sistem akan menghapus pesan yang mengandung tautan.       
+📌 𝗞𝗲𝗯𝗶𝗷𝗮𝗸𝗮𝗻:
+Hanya admin & pengelola yang dapat mengirim tautan.`;
+        
+                await sock.sendMessage(m.cht, {
+                    text: warningText
+                }, { quoted: m.fopenai });
+            }
+        }
         if (m.body.startsWith('@6283168629450')) {
          if (!m.text || !m.quoted.text) {
             return m.reply("Masukkan Pertanyaan Mu Bree🤣")
@@ -479,6 +511,8 @@ class Sticker {
             }
     }
 };
+
+
 
 // Auto reload file
 let file = require.resolve(__filename);
