@@ -84,6 +84,139 @@ module.exports = async (m, sock, store) => {
             break;
         }
 
+case 'confess':
+case 'menfess': {
+    this.menfes = this.menfes ? this.menfes : {}
+    
+    // Check existing session
+    const roof = Object.values(this.menfes).find(menpes => [menpes.a, menpes.b].includes(m.sender))
+    if (roof) {
+        return m.reply(`╭━━━━━━━━━━━━━━┅
+│ ⚠️ *SESI AKTIF*
+├━━━━━━━━━━━━━━┅
+│ Kamu masih berada dalam
+│ sesi menfess yang aktif!
+│ Tunggu hingga selesai...
+╰━━━━━━━━━━━━━━┅`)
+    }
+
+    // Validate private chat
+    if (m.isPc) {
+        return m.reply({ 
+            text: `╭━━━━━━━━━━━━━━┅
+│ 🔒 *PRIVATE ONLY*
+├━━━━━━━━━━━━━━┅
+│ Fitur ini khusus untuk
+│ penggunaan pribadi!
+╰━━━━━━━━━━━━━━┅`, 
+            quoted: m.fverif 
+        })
+    }
+
+    // Validate input format
+    if (!text || !text.includes(' ')) {
+        return m.reply(`╭━━━━━━━━━━━━━━┅
+│ ℹ️ *CARA PENGGUNAAN*
+├━━━━━━━━━━━━━━┅
+│ ${m.prefix + m.command} nama 628xxx pesan
+│
+│ 📝 *Contoh:*
+│ ${m.prefix + m.command} Rahasia 628776xxxx
+│ Hay, I like you!
+╰━━━━━━━━━━━━━━┅`)
+    }
+
+    // Parse input
+    let [namaNya, nomorNya, ...pesanArray] = text.split` `
+    let pesanNya = pesanArray.join(' ')
+
+    // Validate number format
+    if (nomorNya.startsWith('0') || isNaN(nomorNya)) {
+        return m.reply(`╭━━━━━━━━━━━━━━┅
+│ ⚠️ *FORMAT SALAH*
+├━━━━━━━━━━━━━━┅
+│ Gunakan format 628xxx
+│ bukan 08xxx
+│
+│ 📝 *Contoh:*
+│ ${m.prefix + m.command} Rahasia 628776xxxx
+│ Hay, I like you!
+╰━━━━━━━━━━━━━━┅`)
+    }
+
+    // Prepare menfess message
+    const menfessText = `╭━━━━━━━━━━━━━━┅
+│ 💌 *PESAN RAHASIA*
+├━━━━━━━━━━━━━━┅
+│ Dari: ${namaNya}
+│ 
+│ ${pesanNya}
+├━━━━━━━━━━━━━━┅
+│ Reply:
+│ • *Balasmenfes* - Terima
+│ • *Tolakmenfess* - Tolak
+╰━━━━━━━━━━━━━━┅`
+
+    // Create session
+    let id = m.sender
+    this.menfes[id] = {
+        id,
+        a: m.sender,
+        b: nomorNya + "@s.whatsapp.net",
+        state: 'WAITING'
+    }
+
+    // Send notification to target
+    await sock.sendMessage(nomorNya + "@s.whatsapp.net", { 
+        text: `╭━━━━━━━━━━━━━━┅
+│ 📨 *MENFESS BARU*
+├━━━━━━━━━━━━━━┅
+│ Kamu menerima pesan 
+│ rahasia baru!
+│ Cek sekarang...
+╰━━━━━━━━━━━━━━┅`, 
+        quoted: m.fverif 
+    })
+
+    // Send success message
+    return m.reply(`╭━━━━━━━━━━━━━━┅
+│ ✅ *TERKIRIM*
+├━━━━━━━━━━━━━━┅
+│ Pesan telah dikirim ke
+│ nomor tujuan!
+│
+│ Tunggu balasan ya...
+╰━━━━━━━━━━━━━━┅`)
+}
+break
+
+case 'balasconfess':
+case 'balasmenfess': {
+roof = Object.values(this.menfes).find(menpes => [menpes.a, menpes.b].includes(m.sender))
+if (!roof) return m.reply("Belum ada sesi menfess sebelumnya!")
+find = Object.values(this.menfes).find(menpes => menpes.state == 'WAITING')
+let room = Object.values(this.menfes).find(room => [room.a, room.b].includes(m.sender) && room.state === 'WAITING')
+let other = [room.a, room.b].find(user => user !== m.sender)
+find.b = m.sender
+find.state = 'CHATTING'
+this.menfes[find.id] = {...find}
+await sock.sendMessage(other, {text: `@${m.sender.split("@")[0]} telah menerima menfess mu, sekarang kamu bisa chatan lewat bot ini!\n\n*NOTE:* Ketik ${m.prefix}stopmenfess untuk stop`, mentions: [m.sender]})
+sock.sendMessage(m.cht, {text: `Menfess telah siterima, sekarang kamu bisa chatan lewat bot ini!\n\n*NOTE:* Ketik ${m.prefix}stopmenfess untuk stop`})
+}
+break
+
+case 'tolakconfess':
+case 'tolakmenfess': {
+roof = Object.values(this.menfes).find(menpes => [menpes.a, menpes.b].includes(m.sender))
+if (!roof) return m.reply("Belum ada sesi menfess aebelumnya!")
+let room = Object.values(this.menfes).find(room => [room.a, room.b].includes(m.sender) && room.state === 'WAITING')
+let other = [room.a, room.b].find(user => user !== m.sender)
+find = Object.values(this.menfes).find(menpes => menpes.state == 'WAITING')
+sock.sendMessage(other, {text: `${m.sender.split("@")[0]} menolak menfess dari mu...`, mentions: [m.sender]})
+m.reply('Menfess berhasil ditolak!')
+delete this.menfes[roof.id]
+}
+break
 case 'wm':
 case 'swm': {
     try {
@@ -244,7 +377,7 @@ class Sticker {
     return imageUrls;
   }
 }
-    m.react("🕖") 
+    m.react("🕖 ") 
   try {
     if (m.text) {
       const stickerUrl = m.text.trim();
@@ -294,12 +427,11 @@ class Sticker {
 
         default:
         if (m.body.startsWith('@6283168629450')) {
-         if (!text && !m.quoted.body) {
+         if (!m.text || !m.quoted.text) {
             return m.reply("Masukkan Pertanyaan Mu Bree🤣")
          }
-         m.react("☘️");
-         let input = text ? text : m.quoted.body
-          const apiResponse = await fetch(`https://anira.site/api/ai/claude?q=${encodeURIComponent(input)}&apikey=${config.apikey}`);
+         let input = m.text ? m.text : m.quoted.text
+          const apiResponse = await fetch(`https://anira.site/api/ai/claude?q=${encodeURIComponent(text)}&apikey=${config.apikey}`);
             const json = await apiResponse.json();
 
             if (!json || !json.result) {

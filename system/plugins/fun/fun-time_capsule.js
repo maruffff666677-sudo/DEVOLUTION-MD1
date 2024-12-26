@@ -27,12 +27,13 @@ module.exports = {
             let user = db.list().user[m.sender];
             if (!user.memories) user.memories = [];
 
-            const command = text.toLowerCase();
+            const args = text.split(' ');
+            const command = args[0].toLowerCase();
+            const memory = args.slice(1).join(' ');
             const currentTime = moment().tz('Asia/Jakarta');
 
             switch (command) {
-                case 'store':
-                    const memory = text.slice(1).join(' ');
+                case 'store': {
                     if (!memory) return m.reply('❌ Masukkan pesan yang ingin disimpan!');
 
                     if (user.memories.length >= 10) {
@@ -80,8 +81,9 @@ module.exports = {
 │ ${newMemory.prediction}
 │
 ╰═════════════════════`);
+                }
 
-                case 'read':
+                case 'read': {
                     if (!user.memories || user.memories.length === 0) {
                         return m.reply(`╭═══❯ *EMPTY CAPSULE* ❮═══
 │
@@ -124,8 +126,9 @@ module.exports = {
 harta yang tak ternilai harganya.`;
 
                     return m.reply(caption);
+                }
 
-                case 'random':
+                case 'random': {
                     if (!user.memories || user.memories.length === 0) {
                         return m.reply("❌ Belum ada memori tersimpan!");
                     }
@@ -151,6 +154,7 @@ harta yang tak ternilai harganya.`;
 │ ${randomMemory.prediction}
 │
 ╰═════════════════════`);
+                }
 
                 default:
                     return m.reply("❌ Command tidak valid!");

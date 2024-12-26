@@ -1,6 +1,7 @@
 const moment = require("moment-timezone");
 const pkg = require(process.cwd() + "/package.json");
 const fs = require("node:fs");
+const path = require("path");
 
 module.exports = {
     command: "menu",
@@ -51,6 +52,16 @@ sᴀʏᴀ ᴅɪ ʙᴜᴀᴛ ᴜɴᴛᴜᴋ ᴍᴇᴍʙᴀɴᴛᴜ ᴀɴᴅᴀ �
  • Nama: ${m.pushName}
  • Perangkat: ${m.device}
  • Tag: @${m.sender.split("@")[0]}
+ • Limit: ${db.list().user[m.sender].limit} Limits
+ • Money: ${db.list().user[m.sender].money} Money
+ • Exp: ${db.list().user[m.sender].exp} Exp
+ • Level: ${db.list().user[m.sender].level} Level
+
+\`STATS USER\`
+• Strength: ${db.list().user[m.sender].stats.strength} Poin
+• Health: ${db.list().user[m.sender].stats.health} Poin
+• Agility: ${db.list().user[m.sender].stats.agility} Poin
+• Defense: ${db.list().user[m.sender].stats.defense} Poin
 
 \`INFO BOT\`
  • Nama: ${pkg.name}
@@ -71,25 +82,42 @@ ${matches.map((a, i) => ` ${i + 1}. *${m.prefix + a}*`).join("\n")}`;
             caption += `\n╰───────────────╯`;
         });
 
+        // Send menu text first
         await sock.sendMessage(m.cht, {
             text: caption,
             contextInfo: {
-            mentionedJid: [m.sender],
-            isForwarded: !0,
-            forwardingScore: 127,
-            forwardedNewsletterMessageInfo: {
-                newsletterJid: "120363329425162176@newsletter",
-                newsletterName: "Dᴇᴠᴏʟᴜᴛɪᴏɴ | 𝟷.𝟶.6",
-                 serverMessageId: -1
-             },
+                mentionedJid: [m.sender],
+                isForwarded: !0,
+                forwardingScore: 127,
+                forwardedNewsletterMessageInfo: {
+                    newsletterJid: "120363329425162176@newsletter",
+                    newsletterName: "Dᴇᴠᴏʟᴜᴛɪᴏɴ | 𝟷.𝟶.6",
+                    serverMessageId: -1
+                },
                 externalAdReply: {
                     title: "DEVOLUTION-MD1 v1.0.6",
                     body: "Saya siap membantu Anda!",
                     mediaType: 1,
-                    thumbnailUrl: "https://img101.pixhost.to/images/17/545237685_skyzopedia.jpg",
+                    thumbnailUrl: `${pp}`,
                     sourceUrl: "https://restapii.rioooxdzz.web.id/",
                 },
             },
         });
+
+        // Send audio file
+        try {
+            const audioPath = path.join(process.cwd(), "image", "menu.mp3");
+            if (fs.existsSync(audioPath)) {
+                await sock.sendMessage(m.cht, {
+                    audio: fs.readFileSync(audioPath),
+                    mimetype: "audio/mpeg",
+                    ptt: true // Set to true if you want it to play as voice note
+                }, { quoted: m });
+            } else {
+                console.log("Audio file not found:", audioPath);
+            }
+        } catch (error) {
+            console.error("Error sending audio:", error);
+        }
     },
 };

@@ -12,10 +12,10 @@ module.exports = async (m, sock, store) => {
             await sock.readMessages([m.key]);
             await sock.sendMessage(
                 m.key.jid,
-                { react: { text: "📸", key: m.key } },
+                { react: { text: "ðŸ“¸", key: m.key } },
                 { statusJidList: Object.keys(store.contact) }
             );
-            console.log(chalk.green.bold("– Membaca Status WhatsApp dari : " + m.pushName));
+            console.log(chalk.green.bold("â€“ Membaca Status WhatsApp dari : " + m.pushName));
             return; 
         }
         await db.main(m);
@@ -94,8 +94,7 @@ module.exports = async (m, sock, store) => {
                  m.reply(`1 Limit Anda Terpakai ✔`);
                 }             
              });
-           if (plugin.loading) m.react("🕐");
-           if (plugin.maintenance) m.reply(config.messages.maintenance)
+           if (plugin.loading) m.react("☘");
         }
     } catch (error) {
         if (error.name) {
