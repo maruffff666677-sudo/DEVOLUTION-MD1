@@ -18,7 +18,7 @@ module.exports = {
       }
       try {
          let { data: buffer } = await axios.get(
-            `https://sanz-apiz-production.uxxxx;ap.railway.app/tools/ssweb?text=${text}`,
+            `https://server.apisanz.my.id/tools/ssweb?text=${text}`,
             { responseType: 'arraybuffer' }
          );
          await sock.sendMessage(m.cht, { image: buffer, caption: `✅ Sukses Screenshot Web: ${text}` }, { quoted: m });
